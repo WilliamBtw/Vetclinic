@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="13fa58c7ec354ecea61c6db4f17b72d7" Name="Diagram1" ZoomLevel="88">
+        <EntityTypeShape EntityType="vetModel.Auth" Width="1.5" PointX="5.25" PointY="10.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.Cabinet" Width="1.5" PointX="10.5" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.Client" Width="1.5" PointX="5.25" PointY="12.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.Diagnosis" Width="1.5" PointX="12.75" PointY="12.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.Gender" Width="1.5" PointX="0.75" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.MedicalCard" Width="1.5" PointX="7.5" PointY="7.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.MedicalExamination" Width="1.5" PointX="15" PointY="12.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.Pet" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.Position" Width="1.5" PointX="6" PointY="15.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.Procedure" Width="1.5" PointX="12.75" PointY="15.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.Role" Width="1.5" PointX="6" PointY="17.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.Staff" Width="1.5" PointX="8.25" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.TypePet" Width="1.5" PointX="0.75" PointY="5.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.User" Width="1.5" PointX="3" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="vetModel.VetClinic" Width="1.5" PointX="8.25" PointY="15.5" IsExpanded="true" />
+        <AssociationConnector Association="vetModel.FK__Auth__IdUser__3F466844" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__Cabinet__IdStaff__5165187F" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__Cabinet__IdVetCl__52593CB8" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__MedicalEx__IdCab__5FB337D6" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__Procedure__IdCab__5AEE82B9" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__Client__IdUser__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__MedicalCa__IdCli__5535A963" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__MedicalEx__IdDia__5DCAEF64" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__Pet__IdGender__47DBAE45" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__User__Gender__3C69FB99" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__MedicalCa__IdPet__5629CD9C" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__MedicalEx__IdPro__5EBF139D" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__MedicalEx__IdSta__60A75C0F" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__Pet__IdTypePet__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__Staff__IdPositio__4CA06362" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__Staff__IdRole__4BAC3F29" ManuallyRouted="false" />
+        <AssociationConnector Association="vetModel.FK__Staff__IdUser__4AB81AF0" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,83 @@
+﻿<Page x:Class="vetclinic.Administrator.PageAdminAppointment"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:vetclinic.Administrator"
+      mc:Ignorable="d" 
+      d:DesignHeight="1000"
+      d:DesignWidth="1370"
+      Title="PageAdminAppointment"
+      Style="{StaticResource pgDefault}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="700"/>
+            <RowDefinition Height="100"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" 
+                  Text="Appointment"
+                  HorizontalAlignment="Center"
+                  FontSize="72"/>
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top"
+                    Grid.Row="1">
+            <TextBox Height="74"
+                     Width="280"
+                     />
+            <Button Content="Search"
+                    FontSize="36"
+                    Width="170"
+                    Height="60"
+                    />
+            
+        </StackPanel>
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Grid.Row="2">
+            <DataGrid Style="{StaticResource dgStyle}"
+                      x:Name="dgAppointment"
+                      />
+            
+        </StackPanel>
+        <Button Content="New"
+                Grid.Row="3"
+                HorizontalAlignment="Center"
+                Style="{StaticResource btnActivity}"
+                    />
+        <ListView Grid.Row="2"
+                  x:Name="lvAdminAppointment" SelectionChanged="lvAdminAppointment_SelectionChanged"
+                  >
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Width="325"
+                                    Header="Name Client"
+                                    DisplayMemberBinding="{Binding FirstName}"
+                                    />
+                    <GridViewColumn Width="352"
+                                    Header="datetime"
+                                    DisplayMemberBinding="{Binding DateTime}"/>
+                    <GridViewColumn Width="325"
+                                    Header="btn_edit"/>
+                    <GridViewColumn Width="325"
+                                    Header="btn_delete">
+                        <GridViewColumn.CellTemplate >
+                            <DataTemplate>
+                                <Button x:Name="btn_Edit"
+                                        Content="Edit"
+                                        Style="{StaticResource btnActivity}"
+                                        />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                </GridView>
+            </ListView.View>
+            
+        </ListView>
+    </Grid>
+</Page>

@@ -1,0 +1,462 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="vetModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Auth">
+    <Key>
+      <PropertyRef Name="IdAuth" />
+    </Key>
+    <Property Name="IdAuth" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <Property Name="Login" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Auth__IdUser__3F466844" FromRole="Auth" ToRole="User" />
+  </EntityType>
+  <EntityType Name="Cabinet">
+    <Key>
+      <PropertyRef Name="IdCabinet" />
+    </Key>
+    <Property Name="IdCabinet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameCabinet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NumberCabinet" Type="Int32" Nullable="false" />
+    <Property Name="IdStaff" Type="Int32" />
+    <Property Name="IdVetClinic" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Cabinet__IdStaff__5165187F" FromRole="Cabinet" ToRole="Staff" />
+    <NavigationProperty Name="VetClinic" Relationship="Self.FK__Cabinet__IdVetCl__52593CB8" FromRole="Cabinet" ToRole="VetClinic" />
+    <NavigationProperty Name="MedicalExamination" Relationship="Self.FK__MedicalEx__IdCab__5FB337D6" FromRole="Cabinet" ToRole="MedicalExamination" />
+    <NavigationProperty Name="Procedure" Relationship="Self.FK__Procedure__IdCab__5AEE82B9" FromRole="Cabinet" ToRole="Procedure" />
+  </EntityType>
+  <EntityType Name="Client">
+    <Key>
+      <PropertyRef Name="IdClient" />
+    </Key>
+    <Property Name="IdClient" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Client__IdUser__4222D4EF" FromRole="Client" ToRole="User" />
+    <NavigationProperty Name="MedicalCard" Relationship="Self.FK__MedicalCa__IdCli__5535A963" FromRole="Client" ToRole="MedicalCard" />
+  </EntityType>
+  <EntityType Name="Diagnosis">
+    <Key>
+      <PropertyRef Name="IdDiagnosis" />
+    </Key>
+    <Property Name="IdDiagnosis" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameDIagnosis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CodeDiagnosis" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="DescriptionDIagnosis" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="MedicalExamination" Relationship="Self.FK__MedicalEx__IdDia__5DCAEF64" FromRole="Diagnosis" ToRole="MedicalExamination" />
+  </EntityType>
+  <EntityType Name="Gender">
+    <Key>
+      <PropertyRef Name="IdGender" />
+    </Key>
+    <Property Name="IdGender" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="NameGender" Type="String" MaxLength="60" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Pet" Relationship="Self.FK__Pet__IdGender__47DBAE45" FromRole="Gender" ToRole="Pet" />
+    <NavigationProperty Name="User" Relationship="Self.FK__User__Gender__3C69FB99" FromRole="Gender" ToRole="User" />
+  </EntityType>
+  <EntityType Name="MedicalCard">
+    <Key>
+      <PropertyRef Name="IdMedicalCard" />
+    </Key>
+    <Property Name="IdMedicalCard" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdClient" Type="Int32" Nullable="false" />
+    <Property Name="IdPet" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__MedicalCa__IdCli__5535A963" FromRole="MedicalCard" ToRole="Client" />
+    <NavigationProperty Name="Pet" Relationship="Self.FK__MedicalCa__IdPet__5629CD9C" FromRole="MedicalCard" ToRole="Pet" />
+  </EntityType>
+  <EntityType Name="MedicalExamination">
+    <Key>
+      <PropertyRef Name="IdMedicalExamination" />
+    </Key>
+    <Property Name="IdMedicalExamination" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdDiagnosis" Type="Int32" />
+    <Property Name="IdProcedure" Type="Int32" />
+    <Property Name="IdCabinet" Type="Int32" Nullable="false" />
+    <Property Name="IdStaff" Type="Int32" Nullable="false" />
+    <Property Name="DateTimeMedicalExamination" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="DateTimeStartProcedure" Type="DateTime" Precision="3" />
+    <Property Name="DateTimeEndProcedure" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Cabinet" Relationship="Self.FK__MedicalEx__IdCab__5FB337D6" FromRole="MedicalExamination" ToRole="Cabinet" />
+    <NavigationProperty Name="Diagnosis" Relationship="Self.FK__MedicalEx__IdDia__5DCAEF64" FromRole="MedicalExamination" ToRole="Diagnosis" />
+    <NavigationProperty Name="Procedure" Relationship="Self.FK__MedicalEx__IdPro__5EBF139D" FromRole="MedicalExamination" ToRole="Procedure" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__MedicalEx__IdSta__60A75C0F" FromRole="MedicalExamination" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Pet">
+    <Key>
+      <PropertyRef Name="IdPet" />
+    </Key>
+    <Property Name="IdPet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdTypePet" Type="Int32" Nullable="false" />
+    <Property Name="NamePet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IdGender" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Birthday" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="Gender" Relationship="Self.FK__Pet__IdGender__47DBAE45" FromRole="Pet" ToRole="Gender" />
+    <NavigationProperty Name="MedicalCard" Relationship="Self.FK__MedicalCa__IdPet__5629CD9C" FromRole="Pet" ToRole="MedicalCard" />
+    <NavigationProperty Name="TypePet" Relationship="Self.FK__Pet__IdTypePet__46E78A0C" FromRole="Pet" ToRole="TypePet" />
+  </EntityType>
+  <EntityType Name="Position">
+    <Key>
+      <PropertyRef Name="IdPosition" />
+    </Key>
+    <Property Name="IdPosition" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PositionName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__IdPositio__4CA06362" FromRole="Position" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Procedure">
+    <Key>
+      <PropertyRef Name="IdProcedure" />
+    </Key>
+    <Property Name="IdProcedure" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameProcedure" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Cost" Type="Decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="IdCabinet" Type="Int32" Nullable="false" />
+    <Property Name="DurationInSeconds" Type="Int32" />
+    <NavigationProperty Name="Cabinet" Relationship="Self.FK__Procedure__IdCab__5AEE82B9" FromRole="Procedure" ToRole="Cabinet" />
+    <NavigationProperty Name="MedicalExamination" Relationship="Self.FK__MedicalEx__IdPro__5EBF139D" FromRole="Procedure" ToRole="MedicalExamination" />
+  </EntityType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="IdRole" />
+    </Key>
+    <Property Name="IdRole" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RoleName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__IdRole__4BAC3F29" FromRole="Role" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="IdStaff" />
+    </Key>
+    <Property Name="IdStaff" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="IdUser" Type="Int32" Nullable="false" />
+    <Property Name="IdRole" Type="Int32" Nullable="false" />
+    <Property Name="IdPosition" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Cabinet" Relationship="Self.FK__Cabinet__IdStaff__5165187F" FromRole="Staff" ToRole="Cabinet" />
+    <NavigationProperty Name="MedicalExamination" Relationship="Self.FK__MedicalEx__IdSta__60A75C0F" FromRole="Staff" ToRole="MedicalExamination" />
+    <NavigationProperty Name="Position" Relationship="Self.FK__Staff__IdPositio__4CA06362" FromRole="Staff" ToRole="Position" />
+    <NavigationProperty Name="Role" Relationship="Self.FK__Staff__IdRole__4BAC3F29" FromRole="Staff" ToRole="Role" />
+    <NavigationProperty Name="User" Relationship="Self.FK__Staff__IdUser__4AB81AF0" FromRole="Staff" ToRole="User" />
+  </EntityType>
+  <EntityType Name="TypePet">
+    <Key>
+      <PropertyRef Name="IdTypePet" />
+    </Key>
+    <Property Name="IdTypePet" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameTypePet" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Pet" Relationship="Self.FK__Pet__IdTypePet__46E78A0C" FromRole="TypePet" ToRole="Pet" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="IdUser" />
+    </Key>
+    <Property Name="IdUser" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Patronymic" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Birthday" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PassportNumber" Type="String" MaxLength="4" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="PassportSeries" Type="String" MaxLength="6" FixedLength="true" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="3" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Auth" Relationship="Self.FK__Auth__IdUser__3F466844" FromRole="User" ToRole="Auth" />
+    <NavigationProperty Name="Client" Relationship="Self.FK__Client__IdUser__4222D4EF" FromRole="User" ToRole="Client" />
+    <NavigationProperty Name="Gender1" Relationship="Self.FK__User__Gender__3C69FB99" FromRole="User" ToRole="Gender" />
+    <NavigationProperty Name="Staff" Relationship="Self.FK__Staff__IdUser__4AB81AF0" FromRole="User" ToRole="Staff" />
+  </EntityType>
+  <EntityType Name="VetClinic">
+    <Key>
+      <PropertyRef Name="IdVetClinic" />
+    </Key>
+    <Property Name="IdVetClinic" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="NameDepartment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Cabinet" Relationship="Self.FK__Cabinet__IdVetCl__52593CB8" FromRole="VetClinic" ToRole="Cabinet" />
+  </EntityType>
+  <Association Name="FK__Auth__IdUser__3F466844">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Auth" Type="Self.Auth" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Auth">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cabinet__IdStaff__5165187F">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="0..1" />
+    <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="IdStaff" />
+      </Principal>
+      <Dependent Role="Cabinet">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Cabinet__IdVetCl__52593CB8">
+    <End Role="VetClinic" Type="Self.VetClinic" Multiplicity="1" />
+    <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="VetClinic">
+        <PropertyRef Name="IdVetClinic" />
+      </Principal>
+      <Dependent Role="Cabinet">
+        <PropertyRef Name="IdVetClinic" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MedicalEx__IdCab__5FB337D6">
+    <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="1" />
+    <End Role="MedicalExamination" Type="Self.MedicalExamination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cabinet">
+        <PropertyRef Name="IdCabinet" />
+      </Principal>
+      <Dependent Role="MedicalExamination">
+        <PropertyRef Name="IdCabinet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Procedure__IdCab__5AEE82B9">
+    <End Role="Cabinet" Type="Self.Cabinet" Multiplicity="1" />
+    <End Role="Procedure" Type="Self.Procedure" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Cabinet">
+        <PropertyRef Name="IdCabinet" />
+      </Principal>
+      <Dependent Role="Procedure">
+        <PropertyRef Name="IdCabinet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Client__IdUser__4222D4EF">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Client" Type="Self.Client" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Client">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MedicalCa__IdCli__5535A963">
+    <End Role="Client" Type="Self.Client" Multiplicity="1" />
+    <End Role="MedicalCard" Type="Self.MedicalCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Client">
+        <PropertyRef Name="IdClient" />
+      </Principal>
+      <Dependent Role="MedicalCard">
+        <PropertyRef Name="IdClient" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MedicalEx__IdDia__5DCAEF64">
+    <End Role="Diagnosis" Type="Self.Diagnosis" Multiplicity="0..1" />
+    <End Role="MedicalExamination" Type="Self.MedicalExamination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Diagnosis">
+        <PropertyRef Name="IdDiagnosis" />
+      </Principal>
+      <Dependent Role="MedicalExamination">
+        <PropertyRef Name="IdDiagnosis" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pet__IdGender__47DBAE45">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="IdGender" />
+      </Principal>
+      <Dependent Role="Pet">
+        <PropertyRef Name="IdGender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__User__Gender__3C69FB99">
+    <End Role="Gender" Type="Self.Gender" Multiplicity="1" />
+    <End Role="User" Type="Self.User" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Gender">
+        <PropertyRef Name="IdGender" />
+      </Principal>
+      <Dependent Role="User">
+        <PropertyRef Name="Gender" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MedicalCa__IdPet__5629CD9C">
+    <End Role="Pet" Type="Self.Pet" Multiplicity="1" />
+    <End Role="MedicalCard" Type="Self.MedicalCard" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Pet">
+        <PropertyRef Name="IdPet" />
+      </Principal>
+      <Dependent Role="MedicalCard">
+        <PropertyRef Name="IdPet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MedicalEx__IdPro__5EBF139D">
+    <End Role="Procedure" Type="Self.Procedure" Multiplicity="0..1" />
+    <End Role="MedicalExamination" Type="Self.MedicalExamination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Procedure">
+        <PropertyRef Name="IdProcedure" />
+      </Principal>
+      <Dependent Role="MedicalExamination">
+        <PropertyRef Name="IdProcedure" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MedicalEx__IdSta__60A75C0F">
+    <End Role="Staff" Type="Self.Staff" Multiplicity="1" />
+    <End Role="MedicalExamination" Type="Self.MedicalExamination" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Staff">
+        <PropertyRef Name="IdStaff" />
+      </Principal>
+      <Dependent Role="MedicalExamination">
+        <PropertyRef Name="IdStaff" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Pet__IdTypePet__46E78A0C">
+    <End Role="TypePet" Type="Self.TypePet" Multiplicity="1" />
+    <End Role="Pet" Type="Self.Pet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TypePet">
+        <PropertyRef Name="IdTypePet" />
+      </Principal>
+      <Dependent Role="Pet">
+        <PropertyRef Name="IdTypePet" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__IdPositio__4CA06362">
+    <End Role="Position" Type="Self.Position" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Position">
+        <PropertyRef Name="IdPosition" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="IdPosition" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__IdRole__4BAC3F29">
+    <End Role="Role" Type="Self.Role" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Role">
+        <PropertyRef Name="IdRole" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="IdRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__Staff__IdUser__4AB81AF0">
+    <End Role="User" Type="Self.User" Multiplicity="1" />
+    <End Role="Staff" Type="Self.Staff" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="User">
+        <PropertyRef Name="IdUser" />
+      </Principal>
+      <Dependent Role="Staff">
+        <PropertyRef Name="IdUser" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="vetEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Auth" EntityType="Self.Auth" />
+    <EntitySet Name="Cabinet" EntityType="Self.Cabinet" />
+    <EntitySet Name="Client" EntityType="Self.Client" />
+    <EntitySet Name="Diagnosis" EntityType="Self.Diagnosis" />
+    <EntitySet Name="Gender" EntityType="Self.Gender" />
+    <EntitySet Name="MedicalCard" EntityType="Self.MedicalCard" />
+    <EntitySet Name="MedicalExamination" EntityType="Self.MedicalExamination" />
+    <EntitySet Name="Pet" EntityType="Self.Pet" />
+    <EntitySet Name="Position" EntityType="Self.Position" />
+    <EntitySet Name="Procedure" EntityType="Self.Procedure" />
+    <EntitySet Name="Role" EntityType="Self.Role" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" />
+    <EntitySet Name="TypePet" EntityType="Self.TypePet" />
+    <EntitySet Name="User" EntityType="Self.User" />
+    <EntitySet Name="VetClinic" EntityType="Self.VetClinic" />
+    <AssociationSet Name="FK__Auth__IdUser__3F466844" Association="Self.FK__Auth__IdUser__3F466844">
+      <End Role="User" EntitySet="User" />
+      <End Role="Auth" EntitySet="Auth" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cabinet__IdStaff__5165187F" Association="Self.FK__Cabinet__IdStaff__5165187F">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="Cabinet" EntitySet="Cabinet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Cabinet__IdVetCl__52593CB8" Association="Self.FK__Cabinet__IdVetCl__52593CB8">
+      <End Role="VetClinic" EntitySet="VetClinic" />
+      <End Role="Cabinet" EntitySet="Cabinet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MedicalEx__IdCab__5FB337D6" Association="Self.FK__MedicalEx__IdCab__5FB337D6">
+      <End Role="Cabinet" EntitySet="Cabinet" />
+      <End Role="MedicalExamination" EntitySet="MedicalExamination" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Procedure__IdCab__5AEE82B9" Association="Self.FK__Procedure__IdCab__5AEE82B9">
+      <End Role="Cabinet" EntitySet="Cabinet" />
+      <End Role="Procedure" EntitySet="Procedure" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Client__IdUser__4222D4EF" Association="Self.FK__Client__IdUser__4222D4EF">
+      <End Role="User" EntitySet="User" />
+      <End Role="Client" EntitySet="Client" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MedicalCa__IdCli__5535A963" Association="Self.FK__MedicalCa__IdCli__5535A963">
+      <End Role="Client" EntitySet="Client" />
+      <End Role="MedicalCard" EntitySet="MedicalCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MedicalEx__IdDia__5DCAEF64" Association="Self.FK__MedicalEx__IdDia__5DCAEF64">
+      <End Role="Diagnosis" EntitySet="Diagnosis" />
+      <End Role="MedicalExamination" EntitySet="MedicalExamination" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pet__IdGender__47DBAE45" Association="Self.FK__Pet__IdGender__47DBAE45">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="Pet" EntitySet="Pet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__User__Gender__3C69FB99" Association="Self.FK__User__Gender__3C69FB99">
+      <End Role="Gender" EntitySet="Gender" />
+      <End Role="User" EntitySet="User" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MedicalCa__IdPet__5629CD9C" Association="Self.FK__MedicalCa__IdPet__5629CD9C">
+      <End Role="Pet" EntitySet="Pet" />
+      <End Role="MedicalCard" EntitySet="MedicalCard" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MedicalEx__IdPro__5EBF139D" Association="Self.FK__MedicalEx__IdPro__5EBF139D">
+      <End Role="Procedure" EntitySet="Procedure" />
+      <End Role="MedicalExamination" EntitySet="MedicalExamination" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MedicalEx__IdSta__60A75C0F" Association="Self.FK__MedicalEx__IdSta__60A75C0F">
+      <End Role="Staff" EntitySet="Staff" />
+      <End Role="MedicalExamination" EntitySet="MedicalExamination" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Pet__IdTypePet__46E78A0C" Association="Self.FK__Pet__IdTypePet__46E78A0C">
+      <End Role="TypePet" EntitySet="TypePet" />
+      <End Role="Pet" EntitySet="Pet" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__IdPositio__4CA06362" Association="Self.FK__Staff__IdPositio__4CA06362">
+      <End Role="Position" EntitySet="Position" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__IdRole__4BAC3F29" Association="Self.FK__Staff__IdRole__4BAC3F29">
+      <End Role="Role" EntitySet="Role" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+    <AssociationSet Name="FK__Staff__IdUser__4AB81AF0" Association="Self.FK__Staff__IdUser__4AB81AF0">
+      <End Role="User" EntitySet="User" />
+      <End Role="Staff" EntitySet="Staff" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
